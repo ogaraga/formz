@@ -51,7 +51,7 @@
         var all_input = [];
         var mesg =[];
         var myValue = document.querySelector('input');
-        var Message = document.getElementById("text");
+        var Message = document.querySelector("textarea");
         var form =document.getElementById("myform");
         form.addEventListener("submit", (e)=>{
         e.preventDefault();
@@ -65,7 +65,7 @@
         let {value} = Message;
         mesg.push({Message:value});
         let inputs = {...all_input, ...mesg};
-        {(myValue.value != "")? 
+        {(myValue.value != "" && Message.value != "")? 
         form.innerHTML = "Data was successfully sent!. Thank you": 
         form.innerHTML = "Please fill in the form properly to submit"}; 
         form.reset();
