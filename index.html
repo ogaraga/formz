@@ -21,6 +21,7 @@
                     <input type="text" name="City" id="city" placeholder="City where you live">
                     <button type="button" id="next">Next</button>
                 </div>
+                <span id="myspan"></span>
                 <div class="divtwo" id="div2" style="display: none;">
                     <input type="text" name="State" id="state" placeholder="State of the city">
                     <input type="text" name="Country" id="country" placeholder="Country of Residence">
@@ -34,20 +35,38 @@
         </div>
     </div>
     <script>
+        const spanning = document.getElementById("myspan");
         let form_container = document.getElementsByClassName("form_container");
         const divOne = document.querySelector(".divone");
         const divTwo = document.querySelector(".divtwo");
         let nextbtn = document.getElementById("next");
         let prevbtn = document.getElementById("prev");
-        let index = 0;
-        nextbtn.addEventListener("click", ()=>{
+        var textbox = document.querySelector("#address");
+        var textbox1 = document.querySelector("#name");
+        var textbox2 = document.querySelector("#email");
+        var textbox3 = document.querySelector("#city");
+        var textbox4 = document.querySelector("#phone");
+        
+        nextbtn.addEventListener("click", (e)=>{
+            e.preventDefault();
+           if ( textbox.value!= "" && textbox1.value !="" && textbox2.value !="" &&
+             textbox3.value !="" && textbox4.value !=""){
             divOne.style.display = "none";
             divTwo.style.display = "block";
+            spanning.innerHTML = "";
+        }
+          else{  
+            divOne.style.display = "block" ;
+            spanning.innerText = "Please fill in the blocks";
+            spanning.style.color = "blue";
+            spanning.style.textAlign ="center";
+    }
         })
         prevbtn.addEventListener("click", ()=>{
             divOne.style.display = "block";
             divTwo.style.display = "none";
         })
+
         var all_input = [];
         var mesg =[];
         var myValue = document.querySelector('input');
@@ -55,6 +74,8 @@
         var form =document.getElementById("myform");
         form.addEventListener("submit", (e)=>{
         e.preventDefault();
+
+        
         form.querySelectorAll("input").forEach(input =>{
         var {name, value} = input;
         all_input.push({name, value});
@@ -66,12 +87,14 @@
         mesg.push({Message:value});
         let inputs = {...all_input, ...mesg};
         {(myValue.value != "" && Message.value != "")? 
-        form.innerHTML = "Data was successfully sent!. Thank you": 
+        form.innerHTML = "Form-Data was successfully sent!. Thank you!": 
         form.innerHTML = "Please fill in the form properly to submit"}; 
+      
         form.reset();
     });
-    
-        
+      
+
+         
     </script>
 </body>
 </html>
